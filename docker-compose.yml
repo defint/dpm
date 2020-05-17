@@ -1,0 +1,64 @@
+version: '3.5'
+
+services:
+  api:
+    image: qr_api
+    build:
+      context: ./qr-be
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=development
+    environment:
+      - PORT=3000
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    links:
+      - postgres:postgres
+    networks:
+      - postgres
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: sh -c "npm run build && npm run start:prod"
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    volumes:
+      - postgres:/data/postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+
+  frontend:
+    image: qr_frontend
+    stdin_open: true
+    build:
+      context: ./qr-fe
+      dockerfile: Dockerfile
+    environment:
+      - PORT=4200
+    ports:
+      - 4200:4200
+    depends_on:
+      - api
+    networks:
+      - postgres
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: sh -c "PORT=4200 npm start"
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:

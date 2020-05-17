@@ -1,0 +1,12 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <XML>
+      <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+    </XML>
+    <codeStyleSettings language="PHP">
+      <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="4" />
+      <option name="KEEP_BLANK_LINES_IN_CODE" value="4" />
+      <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="4" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
