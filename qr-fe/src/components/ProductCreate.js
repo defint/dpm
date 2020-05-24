@@ -2,6 +2,34 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import productService from "../product";
 import QRCode from "qrcode.react";
+import ReactToPrint from "react-to-print";
+
+class ProductPrint extends React.Component {
+  render() {
+    const {product} = this.props;
+
+    return <div className="container">
+      <div style={{ fontSize: 32, marginBottom: 14 }}>
+        {product.title}
+      </div>
+
+      <div className="tag">
+        <QRCode value={JSON.stringify(product)} />
+        <div className="right-side">
+          <div className="price">{product.price}</div>
+          <div style={{ textAlign: "center", fontWeight: 700 }}>
+            ШхДхВ: {product.width}x{product.length}x
+            {product.height}
+          </div>
+          <div className="producer">
+            <div>{product.producer}</div>
+            <div>{product.country}</div>
+          </div>
+        </div>
+      </div>
+    </div>;
+  }
+}
 
 class ProductCreate extends React.Component {
   constructor(props) {
@@ -101,26 +129,16 @@ class ProductCreate extends React.Component {
     return (
       <div className="main">
         {id && (
-          <div className="container">
-            <div style={{ fontSize: 32, marginBottom: 14 }}>
-              {this.state.title}
-            </div>
+            <div>
 
-            <div className="tag">
-              <QRCode value={JSON.stringify(this.state)} />
-              <div className="right-side">
-                <div className="price">{this.state.price}</div>
-                <div style={{ textAlign: "center", fontWeight: 700 }}>
-                  ШхДхВ: {this.state.width}x{this.state.length}x
-                  {this.state.height}
-                </div>
-                <div className="producer">
-                  <div>{this.state.producer}</div>
-                  <div>{this.state.country}</div>
-                </div>
-              </div>
+              <ReactToPrint
+                  trigger={() => {
+                    return <button>Надрукувати</button>;
+                  }}
+                  content={() => this.componentRef}
+              />
+              <ProductPrint product={this.state} ref={el => (this.componentRef = el)} />
             </div>
-          </div>
         )}
         <div className="form-row">
           <div>Назва</div>
