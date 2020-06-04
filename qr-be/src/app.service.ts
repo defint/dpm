@@ -22,6 +22,7 @@ export class AppService {
   async createProduct(item: ProductDto): Promise<Product> {
     const product = new Product();
     product.country = item.country;
+    product.url = item.url;
     product.height = item.height;
     product.length = item.length;
     product.price = item.price;
@@ -38,6 +39,7 @@ export class AppService {
     const product = new Product();
     product.id = id;
     product.country = item.country;
+    product.url = item.url;
     product.height = item.height;
     product.length = item.length;
     product.price = item.price;

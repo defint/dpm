@@ -29,4 +29,7 @@ export class Product {
 
   @Column({ nullable: false })
   country: string;
+
+  @Column({ nullable: false })
+  url: string;
 }

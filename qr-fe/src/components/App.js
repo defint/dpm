@@ -8,7 +8,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <h1>Генератор цінників для підприємства</h1>
+        <h1>Генератор цінників</h1>
 
         <Switch>
           <Route exact path="/" children={<Products />} />

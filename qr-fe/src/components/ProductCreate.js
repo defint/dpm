@@ -14,7 +14,7 @@ class ProductPrint extends React.Component {
       </div>
 
       <div className="tag">
-        <QRCode value={JSON.stringify(product)} />
+        <QRCode value={product.url} />
         <div className="right-side">
           <div className="price">{product.price}</div>
           <div style={{ textAlign: "center", fontWeight: 700 }}>
@@ -43,12 +43,14 @@ class ProductCreate extends React.Component {
       length: 0.0,
       producer: "",
       country: "",
+      url: "",
     };
 
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
     this.handleChangeProducer = this.handleChangeProducer.bind(this);
     this.handleChangeCountry = this.handleChangeCountry.bind(this);
+    this.handleChangeURL = this.handleChangeURL.bind(this);
     this.handleChangeHeight = this.handleChangeHeight.bind(this);
     this.handleChangeLength = this.handleChangeLength.bind(this);
     this.handleChangeWidth = this.handleChangeWidth.bind(this);
@@ -75,6 +77,10 @@ class ProductCreate extends React.Component {
 
   handleChangeCountry(event) {
     this.setState({ country: event.target.value });
+  }
+
+  handleChangeURL(event) {
+    this.setState({ url: event.target.value });
   }
 
   handleChangePrice(event) {
@@ -106,6 +112,7 @@ class ProductCreate extends React.Component {
         length: this.state.length,
         producer: this.state.producer,
         country: this.state.country,
+        url: this.state.url,
       });
     } else {
       await productService.createProduct({
@@ -117,6 +124,7 @@ class ProductCreate extends React.Component {
         length: this.state.length,
         producer: this.state.producer,
         country: this.state.country,
+        url: this.state.url,
       });
     }
 
@@ -204,6 +212,15 @@ class ProductCreate extends React.Component {
             value={this.state.country}
             onChange={this.handleChangeCountry}
             style={{ width: 414 }}
+          />
+        </div>
+        <div className="form-row">
+          <div>URL</div>
+          <input
+              type="text"
+              value={this.state.url}
+              onChange={this.handleChangeURL}
+              style={{ width: 414 }}
           />
         </div>
         <div className="form-row producer">

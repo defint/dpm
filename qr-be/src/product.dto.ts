@@ -6,4 +6,5 @@ export class ProductDto {
   length: number;
   producer: string;
   country: string;
+  url: string;
 }

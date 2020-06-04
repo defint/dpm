@@ -1,6 +1,6 @@
 import React from "react";
 import productService from "../product";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Products extends React.Component {
   state = {
@@ -28,9 +28,11 @@ class Products extends React.Component {
   render() {
     return (
       <div>
-        <Link className="new" to="/create">
-          Створити новий
-        </Link>
+        <button className="new" onClick={() => {
+          this.props.history.push(`/create`);
+        }}>
+          Створити новий товар
+        </button>
         <table>
           <thead>
             <tr>
